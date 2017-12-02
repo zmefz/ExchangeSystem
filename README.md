@@ -19,6 +19,9 @@ params:
 
 response:
 	success: true/false
+    data:
+        currency_from_amount: 	amount of sold currency
+        currency_to_amount: 	amount of bought currency
 	error: 	 transaction creating error
 	message: full errors messages
 

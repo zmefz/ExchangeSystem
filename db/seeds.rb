@@ -10,23 +10,28 @@ default_amount = 10_000
 default_currencies = [
   {
     name: 'US Dollar',
+    code: 'USD',
     coefficent: 1,
   },
   {
     name: 'Euro',
+    code: 'EUR',
     coefficent: 0.84,
   },
   {
     name: 'Japanese yen',
+    code: 'JPY',
     coefficent: 112.11,
   },
   {
     name: 'Canadian dollar',
+    code: 'CAD',
     coefficent: 1.27,
   },
   {
-    name: 'Australian dollar',
-    coefficent: 1.31,
+    name: 'Belarusian Ruble',
+    code: 'BYN',
+    coefficent: 2.01,
   },
 ]
 
@@ -36,6 +41,6 @@ admin.password = 'adminpass'
 admin.save!
 
 default_currencies.each do |currency_data|
-  currency = Currency.create(name: currency_data[:name], amount: default_amount)
+  currency = Currency.create(name: currency_data[:name], code: currency_data[:code], amount: default_amount)
   currency.coefficents.create(value: currency_data[:coefficent], currency: currency)
 end
