@@ -4,6 +4,7 @@ class Currency < ApplicationRecord
   has_many :coefficents
 
   validate :one_active_coefficent_present
+  validates :code, presence: true
 
   def active_coefficents
     coefficents.active
