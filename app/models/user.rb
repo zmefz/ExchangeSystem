@@ -8,6 +8,7 @@ class User < ApplicationRecord
   validates :password_hash, presence: true
 
   has_many :sessions, dependent: :destroy
+  has_one :currency
 
   enum role: [ :admin, :user ]
 

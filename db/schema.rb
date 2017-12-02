@@ -10,11 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171202111033) do
+ActiveRecord::Schema.define(version: 20171202193529) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
+
+  create_table "coefficents", force: :cascade do |t|
+    t.decimal "value", null: false
+    t.bigint "currency_id", null: false
+    t.datetime "timestamp_from"
+    t.datetime "timestamp_to"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["currency_id"], name: "index_coefficents_on_currency_id"
+  end
+
+  create_table "currencies", force: :cascade do |t|
+    t.string "name", null: false
+    t.decimal "amount", precision: 15, scale: 10, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "sessions", force: :cascade do |t|
     t.string "token"
@@ -26,15 +43,17 @@ ActiveRecord::Schema.define(version: 20171202111033) do
 
   create_table "users", force: :cascade do |t|
     t.integer "role", default: 1
-    t.bigint "currency_id"
     t.string "firstname", null: false
     t.string "lastname", null: false
     t.string "passport"
     t.string "password_hash", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "currency_id"
     t.index ["currency_id"], name: "index_users_on_currency_id"
   end
 
+  add_foreign_key "coefficents", "currencies"
   add_foreign_key "sessions", "users"
+  add_foreign_key "users", "currencies"
 end
