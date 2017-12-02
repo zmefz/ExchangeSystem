@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  value: 9.99
-  currency: one
-  timestampFrom: 2017-12-02 22:32:48
-  timestampTo: 2017-12-02 22:32:48
+  value: 1
+  currency: dollar
+  timestamp_from: 2017-12-01 22:32:48
+  timestamp_to: 2017-12-03 22:32:48
 
 two:
-  value: 9.99
-  currency: two
-  timestampFrom: 2017-12-02 22:32:48
-  timestampTo: 2017-12-02 22:32:48
+  value: 0.84
+  currency: euro
+  timestamp_from: 2017-12-01 22:32:48
+  timestamp_to: 2017-12-03 22:32:48
