@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  role: 1
+  firstname: MyString
+  lastname: MyString
+  passport: AB1231212
+  password_hash: $2a$10$gScYNRBX5NzVT22HNGRvLuvwPGdluXt3uK2eiBIv02mUw9wlFHAkK
+
+two:
+  role: 1
+  firstname: MyString
+  lastname: MyString
+  passport: AB3124324
+  password_hash: $2a$10$gScYNRBX5NzVT22HNGRvLuvwPGdluXt3uK2eiBIv02mUw9wlFHAkK
