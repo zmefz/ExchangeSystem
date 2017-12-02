@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+dollar:
+  name: USD
+  amount: 10000
+
+euro:
+  name: BYN
+  amount: 10000
