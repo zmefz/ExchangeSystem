@@ -1,9 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 dollar:
-  name: USD
+  name: US Dollar
+  code: USD
   amount: 10000
 
 euro:
-  name: BYN
+  name: Belarusian Ruble
+  code: BYN
   amount: 10000

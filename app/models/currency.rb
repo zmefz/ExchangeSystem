@@ -6,6 +6,8 @@ class Currency < ApplicationRecord
   validate :one_active_coefficent_present
   validates :code, presence: true
 
+  scope :active, -> () { Coefficent.active.currencies }
+
   def active_coefficents
     coefficents.active
   end

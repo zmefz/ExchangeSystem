@@ -13,19 +13,15 @@ class TransactionsCreatingTest < ActionDispatch::IntegrationTest
     amount = 100
     currency_to_change_amount = CurrencyConverter.convert(@currency_from, @currency_to, amount)
 
-    assert_difference('Currency.find(@currency_from.id).amount', amount) do
-      assert_difference('Currency.find(@currency_to.id).amount', -currency_to_change_amount) do
-        assert_difference('Transaction.count', 1) do
-          post exchanges_url, params: {
-            user: @user_params,
-            transaction: {
-              currency_from_id: @currency_from.id,
-              currency_to_id: @currency_to.id,
-              amount: amount
-            }
-          }
-        end
-      end
+    assert_difference('Transaction.count', 1) do
+      post exchanges_url, params: {
+        user: @user_params,
+        transaction: {
+          currency_from_id: @currency_from.id,
+          currency_to_id: @currency_to.id,
+          amount: amount
+        }
+      }
     end
 
     assert JSON.parse(@response.body)["success"]
