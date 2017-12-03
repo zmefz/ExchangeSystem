@@ -4,10 +4,10 @@ one:
   value: 1
   currency: dollar
   timestamp_from: 2017-12-01 22:32:48
-  timestamp_to: 2017-12-03 22:32:48
+  timestamp_to: 
 
 two:
   value: 0.84
   currency: euro
   timestamp_from: 2017-12-01 22:32:48
-  timestamp_to: 2017-12-03 22:32:48
+  timestamp_to: 

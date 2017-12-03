@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 20171202225234) do
     t.decimal "amount", precision: 15, scale: 10, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "code"
+    t.string "code", null: false
   end
 
   create_table "sessions", force: :cascade do |t|
