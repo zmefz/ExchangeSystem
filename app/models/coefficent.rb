@@ -13,6 +13,7 @@ class Coefficent < ApplicationRecord
   validate :only_one_coefficent_for_currency_present
 
   scope :active, -> () { where('timestamp_from < ? and timestamp_to is null', Time.zone.now) }
+  scope :currencies, -> () { Currency.where(id: select('currency_id')) }
 
   def only_one_coefficent_for_currency_present
     rivals.count == 1
