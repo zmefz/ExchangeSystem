@@ -21,13 +21,6 @@ class Transaction < ApplicationRecord
   validate :currency_balance
 
   before_validation :set_timestamp
-  after_save :change_currencies_amount
-
-  def change_currencies_amount
-    transaction_data = TransactionCalculator.calculate(self)
-    self.currency_from.increase(transaction_data[:currency_from_amount])
-    self.currency_to.decrease(transaction_data[:currency_to_amount])
-  end
 
   def user_transactions_sum
     unless UserTransactionsAmount.validate(self.user, self)
