@@ -1,3 +1,5 @@
+require 'RelativeCurrenciesCalculator'
+
 class CurrenciesController < ApplicationController
 
   skip_before_action :require_user!
@@ -6,7 +8,10 @@ class CurrenciesController < ApplicationController
   before_action :require_admin!, only: [:update]
 
   def index
-    @currencies = Currency.active.all
+    default_currency = Currency.find_by(code: params[:code] || DEFAULT_CURRENCY_CODE)
+    amount           = params[:amount].to_i || 1
+
+    @currencies = RelativeCurrenciesCalculator.calculate(default_currency, amount)
   end
 
   def update
