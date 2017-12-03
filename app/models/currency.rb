@@ -23,12 +23,4 @@ class Currency < ApplicationRecord
     active_coefficents.take
   end
 
-  def increase(value)
-    self.update(amount: self.amount + value)
-  end
-
-  def decrease(value)
-    self.update(amount: self.amount - value)
-  end
-
 end
