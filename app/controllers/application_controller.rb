@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   skip_before_action :verify_authenticity_token
 
-  before_action :require_user!
+  before_action :require_user!, :require_admin!
   helper_method :current_user
 
   def current_user
@@ -13,6 +13,10 @@ class ApplicationController < ActionController::Base
 
   def current_session
     @_current_session ||= find_session || create_session
+  end
+
+  def require_admin!
+    current_user.admin?
   end
 
   def require_user!
