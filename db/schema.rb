@@ -17,18 +17,17 @@ ActiveRecord::Schema.define(version: 20171202225234) do
   enable_extension "postgis"
 
   create_table "coefficents", force: :cascade do |t|
-    t.decimal "value", null: false
+    t.decimal "sell_value", precision: 15, scale: 2, null: false
+    t.decimal "buy_value", precision: 15, scale: 2, null: false
     t.bigint "currency_id", null: false
     t.datetime "timestamp_from"
     t.datetime "timestamp_to"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.index ["currency_id"], name: "index_coefficents_on_currency_id"
   end
 
   create_table "currencies", force: :cascade do |t|
     t.string "name", null: false
-    t.decimal "amount", precision: 15, scale: 10, null: false
+    t.decimal "amount", precision: 15, scale: 2, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "code", null: false
