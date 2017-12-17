@@ -45,17 +45,19 @@ class ExchangesController < ApplicationController
       .where(params[:amount_to] && "amount < ?", params[:amount_to])
       .where(params[:currency_from_id] && "currency_from_id = ?", params[:currency_from_id])
       .where(params[:currency_to_id] && "currency_to_id = ?", params[:currency_to_id])
+      .order(params[:order])
   end
 
   def get_transactions_data
+    all_transactions = transactions.all
     {
-      transactions: transactions.all.map { |transaction| get_transaction_data(transaction) },
+      transactions: all_transactions.map { |transaction| get_transaction_data(transaction) },
       count:  transactions.count,
       amount: transactions.amount,
       daily_amount: transactions.daily.amount,
       most_popular: {
-        currency_from: largest_hash_key(transactions.group(:currency_from_id).count(:currency_from_id)),
-        currency_to:   largest_hash_key(transactions.group(:currency_to_id).count(:currency_to_id)),
+        currency_from: largest_hash_key(all_transactions.group_by(&:currency_from_id)),
+        currency_to:   largest_hash_key(all_transactions.group_by(&:currency_to_id)),
       }
     }
   end
@@ -79,7 +81,7 @@ class ExchangesController < ApplicationController
   end
 
   def largest_hash_key(hash)
-    result = hash.max_by{|k,v| v}
+    result = hash.max_by{|k,v| v.length}
     result[0] if result.present?
   end
 
