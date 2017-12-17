@@ -9,7 +9,7 @@ class CurrenciesController < ApplicationController
 
   def index
     default_currency = Currency.find_by(code: params[:code] || DEFAULT_CURRENCY_CODE)
-    amount           = params[:amount].to_f.round(2) || 1
+    amount           = (params[:amount] || 1).to_f.round(2)
 
     @currencies = RelativeCurrenciesCalculator.calculate(default_currency, amount)
   end
