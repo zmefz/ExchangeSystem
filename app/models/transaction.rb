@@ -20,6 +20,9 @@ class Transaction < ApplicationRecord
   validate :user_transactions_sum
   validate :currency_balance
 
+  scope :daily, -> () { where('timestamp > ?', Date.today.to_time) }
+  scope :amount, -> () { sum(:amount) }
+
   before_validation :set_timestamp
 
   def user_transactions_sum

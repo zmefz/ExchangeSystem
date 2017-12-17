@@ -7,7 +7,7 @@ class UserTransactionsAmount
   private
 
   def self.daily_transaction_amount(user)
-    user.transactions.where('timestamp > ?', Date.today.to_time).sum(:amount)
+    user.transactions.daily.amount
   end
 
 end
