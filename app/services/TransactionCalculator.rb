@@ -7,7 +7,7 @@ class TransactionCalculator
 
     return {
       currency_from_amount: transaction.amount,
-      currency_to_amount:   currency_to_amount
+      currency_to_amount:   currency_to_amount,
     }
   end
 

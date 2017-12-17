@@ -8,11 +8,11 @@ class CurrencyConverter
   private
 
   def self.currency_to_units(currency, amount)
-    amount * currency.buy_value
+    (amount * currency.buy_value).ceil(2)
   end
 
   def self.units_to_currency(currency, amount)
-    amount / currency.sell_value
+    (amount / currency.sell_value).floor(2)
   end
 
 end

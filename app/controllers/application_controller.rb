@@ -16,7 +16,9 @@ class ApplicationController < ActionController::Base
   end
 
   def require_admin!
-    current_user.admin?
+    unless current_user.admin?
+      render json: { success: false, error: 'Access denied' }, status: :unauthorized
+    end
   end
 
   def require_user!
@@ -30,7 +32,7 @@ class ApplicationController < ActionController::Base
   end
 
   def create_session
-    Session.create(user: find_user_by_params)
+    Session.create(user: find_user_by_params) if find_user_by_params
   end
 
   def find_user_by_params
@@ -40,7 +42,7 @@ class ApplicationController < ActionController::Base
   end
 
   def user_data
-    params.require(:user).permit!
+    params.require(:user).permit! if params[:user].present?
   end
 
 end
