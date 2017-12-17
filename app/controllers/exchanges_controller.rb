@@ -38,6 +38,13 @@ class ExchangesController < ApplicationController
 
   def transactions
     Transaction
+      .where(params[:time_from] && "timestamp > ?", params[:time_from])
+      .where(params[:time_to] && "timestamp < ?", params[:time_to])
+      .where(params[:user_id] && "user_id = ?", params[:user_id])
+      .where(params[:amount_from] && "amount > ?", params[:amount_from])
+      .where(params[:amount_to] && "amount < ?", params[:amount_to])
+      .where(params[:currency_from_id] && "currency_from_id = ?", params[:currency_from_id])
+      .where(params[:currency_to_id] && "currency_to_id = ?", params[:currency_to_id])
   end
 
   def get_transactions_data
@@ -72,7 +79,8 @@ class ExchangesController < ApplicationController
   end
 
   def largest_hash_key(hash)
-    hash.max_by{|k,v| v} [0]
+    result = hash.max_by{|k,v| v}
+    result[0] if result.present?
   end
 
 end
