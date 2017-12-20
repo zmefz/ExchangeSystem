@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
 
   skip_before_action :require_admin!
 
-  def index
+  def create
     if current_session.present?
       render json: { success: true, data: { token: current_session.token } }
     else

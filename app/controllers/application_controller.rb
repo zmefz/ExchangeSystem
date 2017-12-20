@@ -7,6 +7,10 @@ class ApplicationController < ActionController::Base
   before_action :require_user!, :require_admin!
   helper_method :current_user, :current_session
 
+  rescue_from StandardError do |error|
+    render json: { success: false, error: error }
+  end
+
   def current_user
     @_current_user ||= current_session.user if current_session.present?
   end
@@ -24,7 +28,11 @@ class ApplicationController < ActionController::Base
   def require_user!
     unless current_user.present?
       render json: { success: false, error: 'User is not provided' }, status: :unauthorized
+      return false
     end
+  rescue => error
+    render json: { success: false, error: error }
+    return false
   end
 
   private
@@ -38,13 +46,15 @@ class ApplicationController < ActionController::Base
   end
 
   def find_user_by_params
-    UserResolver.resolve(user_data)
-  rescue => creating_errors
-    render json: { success: false, error: creating_errors }
+    @_user ||= UserResolver.resolve(user_data)
   end
 
   def user_data
-    params.require(:user).permit! if params[:user].present?
+    if params[:user].present?
+      params.require(:user).permit!
+    else
+      {}
+    end
   end
 
 end
