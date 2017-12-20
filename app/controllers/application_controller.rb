@@ -22,7 +22,9 @@ class ApplicationController < ActionController::Base
   end
 
   def require_user!
-    current_user.present?
+    unless current_user.present?
+      render json: { success: false, error: 'User is not provided' }, status: :unauthorized
+    end
   end
 
   private
