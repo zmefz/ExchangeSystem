@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   skip_before_action :verify_authenticity_token
 
   before_action :require_user!, :require_admin!
-  helper_method :current_user
+  helper_method :current_user, :current_session
 
   def current_user
     @_current_user ||= current_session.user if current_session.present?
