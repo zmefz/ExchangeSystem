@@ -8,10 +8,11 @@ class CurrenciesController < ApplicationController
   before_action :require_admin!, only: [:update]
 
   def index
+    default_currency_set = params[:code].present?
     default_currency = Currency.find_by(code: params[:code] || DEFAULT_CURRENCY_CODE)
     amount           = (params[:amount] || 1).to_f.round(2)
 
-    @currencies = RelativeCurrenciesCalculator.calculate(default_currency, amount)
+    @currencies = RelativeCurrenciesCalculator.calculate(default_currency, default_currency_set, amount)
   end
 
   def update
