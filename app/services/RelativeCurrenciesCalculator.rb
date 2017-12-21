@@ -7,7 +7,7 @@ class RelativeCurrenciesCalculator
       result.append({
         currency: currency,
         amount:   CurrencyConverter.convert(default_currency, currency, amount)
-      }) unless currency.id == default_currency.id
+      })
     end
 
     result
