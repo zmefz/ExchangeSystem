@@ -1,6 +1,6 @@
 class RelativeCurrenciesCalculator
 
-  def self.calculate(default_currency, default_currency_set = false, amount = 1)
+  def self.calculate(default_currency, default_currency_set = false, amount = 1, reversed = nil)
     result = []
 
     Currency.active.find_each do |currency|
@@ -9,7 +9,11 @@ class RelativeCurrenciesCalculator
       if default_currency.id == currency.id
         calculated_amount = 1
       else
-        calculated_amount = CurrencyConverter.convert(default_currency, currency, amount)
+        if reversed
+          calculated_amount = CurrencyConverter.convert_reverse(currency, default_currency, amount)
+        else
+          calculated_amount = CurrencyConverter.convert(default_currency, currency, amount)
+        end
       end
 
       result.append({
