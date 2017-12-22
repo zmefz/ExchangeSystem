@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  skip_before_action :require_admin!, only: [:show]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -36,7 +37,11 @@ class UsersController < ApplicationController
 
   private
     def set_user
-      @user = User.find(params[:id])
+      @user = if params[:id] == 'me'
+        current_user
+      else
+        User.find(params[:id])
+      end
     end
 
     def user_params
@@ -52,6 +57,7 @@ class UsersController < ApplicationController
         id:         user.id,
         first_name: user.firstname,
         last_name:  user.lastname,
+        is_admin:   user.admin?,
         transactions: {
           day_amount:      user.transactions.daily.amount,
           all_time_amount: user.transactions.amount,
