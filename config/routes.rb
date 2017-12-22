@@ -2,5 +2,5 @@ Rails.application.routes.draw do
   resources :users
   resources :exchanges, only: [:show, :index, :create]
   resources :currencies, only: [:index]
-  resources :sessions, only: [:create]
+  resources :sessions, only: [:create, :destroy]
 end
