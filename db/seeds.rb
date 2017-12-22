@@ -16,6 +16,16 @@ default_currencies = [
     code: 'BYN',
     coefficent: 0.49,
   },
+  {
+    name: 'Russian Rouble',
+    code: 'RUB',
+    coefficent: 0.03,
+  },
+  {
+    name: 'Israel Shekel',
+    code: 'ILS',
+    coefficent: 0.57,
+  },
 ]
 
 # Create admin
