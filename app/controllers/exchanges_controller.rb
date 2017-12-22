@@ -67,6 +67,7 @@ class ExchangesController < ApplicationController
 
   def get_transaction_data(transaction)
     {
+      id:       transaction.id,
       user_id:  transaction.user_id,
       amount:   transaction.amount,
       currency_from:  currency_data(transaction.currency_from),
