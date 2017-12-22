@@ -1,3 +1,5 @@
+require 'exceptions'
+
 class TransactionCreator
 
   attr_reader :transaction, :transaction_data
@@ -36,7 +38,7 @@ class TransactionCreator
     })
 
     unless @transaction.save
-      raise ArgumentError(@transaction.errors.full_messages)
+      raise Errors::TransactionCreatingError.new(@transaction.errors)
     end
   end
 

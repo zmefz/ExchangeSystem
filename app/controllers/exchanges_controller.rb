@@ -1,4 +1,5 @@
 require 'TransactionCreator'
+require 'exceptions'
 
 class ExchangesController < ApplicationController
 
@@ -24,6 +25,8 @@ class ExchangesController < ApplicationController
     else
       render json: { success: false, errors: @transaction.errors, message: @transaction.errors.full_messages }
     end
+  rescue Errors::TransactionCreatingError => error
+    render json: { success: false, errors: error.errors, message: error.errors.full_messages }
   end
 
   private

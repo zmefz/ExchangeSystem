@@ -27,7 +27,7 @@ class Transaction < ApplicationRecord
 
   def user_transactions_sum
     unless UserTransactionsAmount.validate(self.user, self)
-      @errors[:user] << "cannot create this transactions"
+      @errors[:user] << "eceeded daily limit"
     end
   end
 
