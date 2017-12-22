@@ -66,12 +66,14 @@ class ExchangesController < ApplicationController
   end
 
   def get_transaction_data(transaction)
+    transaction_data = TransactionCalculator.calculate(transaction)
     {
       id:       transaction.id,
       user_id:  transaction.user_id,
-      amount:   transaction.amount,
-      currency_from:  currency_data(transaction.currency_from),
-      currency_to:    currency_data(transaction.currency_to),
+      exchange_amount:  transaction_data[:currency_from_amount],
+      receive_amount:   transaction_data[:currency_to_amount],
+      currency_from:    currency_data(transaction.currency_from),
+      currency_to:      currency_data(transaction.currency_to),
       timestamp: transaction.timestamp,
     }
   end
