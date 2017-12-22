@@ -37,7 +37,7 @@ default_currencies.each do |currency_data|
   currency = Currency.create(name: currency_data[:name], code: currency_data[:code], amount: default_amount)
   currency.coefficents.create(
     sell_value: currency_data[:coefficent],
-    buy_value: currency_data[:coefficent] + profit,
+    buy_value: currency_data[:coefficent] - profit,
     currency: currency
   )
 end

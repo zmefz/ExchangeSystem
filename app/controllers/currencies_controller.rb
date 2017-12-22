@@ -9,10 +9,10 @@ class CurrenciesController < ApplicationController
 
   def index
     default_currency_set = params[:code].present?
-    default_currency = Currency.find_by(code: params[:code] || DEFAULT_CURRENCY_CODE)
-    amount           = (params[:amount] || 1).to_f.round(2)
+    @default_currency = Currency.find_by(code: params[:code] || DEFAULT_CURRENCY_CODE)
+    amount            = (params[:amount] || 1).to_f.round(2)
 
-    @currencies = RelativeCurrenciesCalculator.calculate(default_currency, default_currency_set, amount)
+    @currencies = RelativeCurrenciesCalculator.calculate(@default_currency, default_currency_set, amount)
   end
 
   def update

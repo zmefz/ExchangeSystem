@@ -11,6 +11,14 @@ class Currency < ApplicationRecord
 
   scope :active, -> () { Coefficent.active.currencies }
 
+  def get_sell_value(default_currency)
+    CurrencyConverter.convert_reverse(default_currency, self, 1)
+  end
+
+  def get_buy_value(default_currency)
+    CurrencyConverter.convert(self, default_currency, 1)
+  end
+
   def active_coefficents
     coefficents.active
   end
