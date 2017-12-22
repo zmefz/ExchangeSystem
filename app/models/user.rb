@@ -5,7 +5,6 @@ class User < ApplicationRecord
 
   validates :firstname, presence: true
   validates :lastname, presence: true
-  validates :password_hash, presence: true
 
   has_many :sessions, dependent: :destroy
   has_many :transactions, dependent: :destroy
