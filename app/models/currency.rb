@@ -4,6 +4,7 @@ class Currency < ApplicationRecord
   has_many :coefficents
 
   validate :one_active_coefficent_present
+  validates :display_count, presence: true
   validates :code, presence: true
 
   delegate :buy_value, to: :coefficent
@@ -12,11 +13,11 @@ class Currency < ApplicationRecord
   scope :active, -> () { Coefficent.active.currencies }
 
   def get_sell_value(default_currency)
-    CurrencyConverter.convert_reverse(default_currency, self, 1)
+    CurrencyConverter.convert_reverse(default_currency, self, self.display_count)
   end
 
   def get_buy_value(default_currency)
-    CurrencyConverter.convert(self, default_currency, 1)
+    CurrencyConverter.convert(self, default_currency, self.display_count)
   end
 
   def active_coefficents
