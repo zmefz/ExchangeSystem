@@ -9,7 +9,7 @@ class RelativeCurrenciesCalculator
       if default_currency.id == currency.id
         calculated_amount = 1
       else
-        calculated_amount = CurrencyConverter.convert_reverse(default_currency, currency, amount)
+        calculated_amount = CurrencyConverter.convert(default_currency, currency, amount)
       end
 
       result.append({
