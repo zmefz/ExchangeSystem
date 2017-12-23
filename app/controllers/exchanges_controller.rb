@@ -59,10 +59,14 @@ class ExchangesController < ApplicationController
       amount: transactions.amount,
       daily_amount: transactions.daily.amount,
       most_popular: {
-        currency_from: largest_hash_key(all_transactions.group_by(&:currency_from_id)),
-        currency_to:   largest_hash_key(all_transactions.group_by(&:currency_to_id)),
+        currency_from: find_currency_code(largest_hash_key(all_transactions.group_by(&:currency_from_id))),
+        currency_to:   find_currency_code(largest_hash_key(all_transactions.group_by(&:currency_to_id))),
       }
     }
+  end
+
+  def find_currency_code(id)
+    Currency.find(id).code
   end
 
   def get_transaction_data(transaction)
