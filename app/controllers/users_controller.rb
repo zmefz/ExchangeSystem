@@ -7,8 +7,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    if current_user
-      render json: { success: true, data: get_data_for_user(current_user) }, status: :ok
+    if @user
+      render json: { success: true, data: get_data_for_user(@user) }, status: :ok
     else
       render json: { success: false, error: 'User not found' }, status: :not_found
     end
